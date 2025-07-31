@@ -1,0 +1,57 @@
+
+
+{% extends 'main.html' %}
+
+{% block title %} OTS - Test Paper {% endblock %}
+
+{% block top %}
+<nav style="background-color: #333; color: #fff; padding: 10px; text-align: center;">
+    <ul style="list-style: none; padding: 0; margin: 0;">
+      <li style="display: inline-block; margin-right: 20px;">
+        <a href="{% url 'OTS:home' %}" style="text-decoration: none; color: #fff;">Home</a>
+      </li>
+    </ul>
+  </nav>
+{% endblock %}
+
+{% block content %}
+  <div class="test-paper" style="max-width: 800px; margin: 40px auto; padding: 20px; background-color: #f9f9f9; border: 1px solid #ddd; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+    <h2 style="margin-top: 0; font-size: 24px; font-weight: bold; color: #333; text-align: center;">Online Test</h2>
+    <form action="{% url 'OTS:calculateTestResult'%}" method="POST"> {# Changed to calculateTestResult for consistency, assuming this is your URL name #}
+      {% csrf_token %}
+      <div class="question-container">
+        {% for question in questions %}
+        <div class="question-card" style="background-color: #fff; padding: 20px; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+          <div class="question-number" style="font-weight: bold; margin-bottom: 10px; font-size: 18px; color: #333;">Question {{ forloop.counter }}:</div>
+          <div class="question-text" style="font-size: 18px; margin-bottom: 20px; color: #666;">{{ question.que }}</div>
+
+          {# *** CRITICAL FIX 1: Add this hidden input for the question ID *** #}
+          <input type="hidden" name="qno_{{ forloop.counter }}" value="{{ question.qid }}">
+
+          <div class="options">
+            <div class="option" style="margin-bottom: 10px;">
+              <input type="radio" name="q{{ question.qid }}" value="A" style="margin-right: 10px;"> {# *** CRITICAL FIX 2: Changed value to uppercase 'A' *** #}
+              <span style="font-size: 16px; color: #666;">A) {{ question.a }}</span>
+            </div>
+            <div class="option" style="margin-bottom: 10px;">
+              <input type="radio" name="q{{ question.qid }}" value="B" style="margin-right: 10px;"> {# *** CRITICAL FIX 2: Changed value to uppercase 'B' *** #}
+              <span style="font-size: 16px; color: #666;">B) {{ question.b }}</span>
+            </div>
+            <div class="option" style="margin-bottom: 10px;">
+              <input type="radio" name="q{{ question.qid }}" value="C" style="margin-right: 10px;"> {# *** CRITICAL FIX 2: Changed value to uppercase 'C' *** #}
+              <span style="font-size: 16px; color: #666;">C) {{ question.c }}</span>
+            </div>
+            <div class="option" style="margin-bottom: 10px;">
+              <input type="radio" name="q{{ question.qid }}" value="D" style="margin-right: 10px;"> {# *** CRITICAL FIX 2: Changed value to uppercase 'D' *** #}
+              <span style="font-size: 16px; color: #666;">D) {{ question.d }}</span>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="submit-button" style="text-align: center; margin-top: 20px;">
+        <input type="submit" value="Submit" style="background-color: #4CAF50; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 18px;">
+      </div>
+    </form>
+  </div>
+{% endblock %}

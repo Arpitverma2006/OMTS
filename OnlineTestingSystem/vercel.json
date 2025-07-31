@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "OnlineTestingSystem/wsgi.py",
+      "use": "@vercel/python",
+      "config": { "maxLambdaSize": "15mb", "runtime": "python3.12" }
+    },
+    {
+      "src": "build_static.sh",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "staticfiles" }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "OnlineTestingSystem/wsgi.py"
+    }
+  ],
+  "env": {
+    "DJANGO_SETTINGS_MODULE": "OnlineTestingSystem.settings",
+    "PYTHON_VERSION": "3.12.6",
+    "DATABASE_URL": "@database_url",
+    "SECRET_KEY": "@secret_key",
+    "DEBUG": "False"
+  }
+}
