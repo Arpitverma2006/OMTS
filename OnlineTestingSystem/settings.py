@@ -122,6 +122,9 @@ STATIC_URL = 'static/'
 
 ALLOWED_HOSTS = ['.vercel.app', 'localhost']
 
+SECRET_KEY = 'your-very-secret-random-string'
+
+
 
 
 CORS_ALLOW_ALL_ORIGINS = True
