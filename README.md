@@ -45,7 +45,9 @@ An AI-enhanced web-based testing platform built with **Django** that allows user
 
 | Candidate Test Interface | Admin Dashboard |
 |--------------------------|-----------------|
-| ![Test UI](./screenshots/test_ui.png) | ![Admin Panel](./screenshots/admin_panel.png) |
+| <img width="1920" height="1078" alt="Welcome to Online Testing System - Google Chrome 05-08-2025 16_00_57" src="https://github.com/user-attachments/assets/ee7ff7b2-dea5-4166-aad4-dc8a536f6c98" />
+ | <img width="1920" height="1078" alt="Welcome to Online Testing System - Google Chrome 05-08-2025 16_06_51" src="https://github.com/user-attachments/assets/ec062c2a-d1a6-48f0-be94-80965d73edf0" />
+|
 
 ---
 
