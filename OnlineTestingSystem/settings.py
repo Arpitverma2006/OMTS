@@ -123,7 +123,7 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
-ALLOWED_HOSTS = ['.vercel.app', 'localhost']
+# ALLOWED_HOSTS = ['.vercel.app', 'localhost']
 
 SECRET_KEY = 'your-very-secret-random-string'
 

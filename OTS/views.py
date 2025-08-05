@@ -157,8 +157,10 @@ def calculateTestResult(request):
     }
     return render(request, 'show_result.html', context)
 
+
+
 def testResultHistory(request):
-    if 'name' not in request.session.keys():
+    if 'username' not in request.session:
         return HttpResponseRedirect("login")
 
     try:
@@ -166,14 +168,29 @@ def testResultHistory(request):
     except Candidate.DoesNotExist:
         return HttpResponseRedirect("login")
 
-    # This query is correct assuming Result.username is a ForeignKey to Candidate
-    results = Result.objects.filter(username=candidate).order_by('-date', '-time') # Added ordering for better history display
+    results = Result.objects.filter(username=candidate).order_by('-date', '-time')
 
     context = {'candidate': candidate, 'results': results}
-    # --- CRITICAL FIX: Ensure this matches your HTML file name ---
     return render(request, 'candidate_history.html', context)
-    # If your file is indeed named 'candidate_history.html', then keep that.
-    # But if it's 'result_history.html', change it here.
+
+
+# def testResultHistory(request):
+#     if 'name' not in request.session.keys():
+#         return HttpResponseRedirect("login")
+
+#     try:
+#         candidate = Candidate.objects.get(username=request.session['username'])
+#     except Candidate.DoesNotExist:
+#         return HttpResponseRedirect("login")
+
+#     # This query is correct assuming Result.username is a ForeignKey to Candidate
+#     results = Result.objects.filter(username=candidate).order_by('-date', '-time') # Added ordering for better history display
+
+#     context = {'candidate': candidate, 'results': results}
+#     # --- CRITICAL FIX: Ensure this matches your HTML file name ---
+#     return render(request, 'candidate_history.html', context)
+#     # If your file is indeed named 'candidate_history.html', then keep that.
+#     # But if it's 'result_history.html', change it here.
 
 
 def showTestResult(request):
